@@ -2,6 +2,9 @@
  * @author e991f665b7e62df5a54fdef19053a4e75117b89 <c@raci.sm>
  */
 
+// Types
+import type { ObjectId } from "https://deno.land/x/mongo@v0.31.1/mod.ts";
+
 // deno-lint-ignore no-explicit-any
 export type TRet = any;
 export type TObject = { [k: string]: TRet };
@@ -15,6 +18,7 @@ export type TResponse = {
 
 // Schemas
 export interface CategorySchema {
+  _id?: ObjectId,
   name: string,
   slug: string,
   description: string,
@@ -22,6 +26,7 @@ export interface CategorySchema {
 }
 
 export interface PostSchema {
+  _id?: ObjectId,
   website: string,
   slug: string,
   domains: string[],
@@ -33,6 +38,7 @@ export interface PostSchema {
 }
 
 export interface SettingsSchema {
+  _id?: ObjectId,
   motd: string
 }
 

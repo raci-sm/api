@@ -32,7 +32,7 @@ class RootController extends BaseController {
       data: {
         motd
       }
-    });
+    } as TResponse);
   }
 }
 

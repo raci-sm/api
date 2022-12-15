@@ -18,7 +18,7 @@ if(!await Database.init(Config.get("database", "uri"), Config.get("database", "d
 import { addControllers, NHttp } from "@deps";
 
 // Controllers
-import { RootController } from "@controllers";
+import { RootController, CategoriesController } from "@controllers";
 
 class Application extends NHttp {
   constructor() {
@@ -37,7 +37,8 @@ class Application extends NHttp {
 
     /* Controllers */
     this.use("/", addControllers([
-      RootController
+      RootController,
+      CategoriesController
     ]));
   }
 }
