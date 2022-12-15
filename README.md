@@ -21,6 +21,11 @@ This is the API used for <a href="https://raci.sm" target="_blank"><code>raci.sm
 $ deno run -A main.ts
 ```
 
+## Docker ✨
+```
+$ docker build -t api .
+$ docker run -dp 2222:2222 api
+```
 ---
 
 ### Contributions 🎉
