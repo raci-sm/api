@@ -9,7 +9,7 @@ import { BaseController, Controller, Get } from "@deps";
 import Database from "@database";
 
 // Types
-import type { RequestEvent, TResponse, CategorySchema } from "@types";
+import type { RequestEvent, TResponse, CategorySchema, PostSchema } from "@types";
 
 @Controller("/categories")
 class CategoriesController extends BaseController {
@@ -25,6 +25,34 @@ class CategoriesController extends BaseController {
       status: 200,
       data: {
         categories
+      }
+    } as TResponse);
+  }
+
+  @Get("/:slug")
+  async slug({ response: res, params }: RequestEvent): Promise<void | Response> {
+    const posts = (await Database.getPosts(params.slug)).map((item: PostSchema) => {
+      if(item._id) delete item._id;
+
+      return {
+        website: item.website,
+        slug: item.slug,
+        domains: item.domains,
+        summary: item.summary
+      };
+    });
+
+    if(posts.length === 0)
+      return res.status(404).json({
+        status: 404,
+        message: `Unable to find any posts for: "${params.slug}"`,
+        data: { }
+      } as TResponse);
+
+    return res.status(200).json({
+      status: 200,
+      data: {
+        posts
       }
     } as TResponse);
   }

@@ -23,11 +23,11 @@ class Database {
     return await this.categories.find({ }).toArray();
   }
 
-  public static getPosts = async (): Promise<PostSchema[]> => {
+  public static getPosts = async (category: string): Promise<PostSchema[]> => {
     if(!this.posts)
       throw "You may not call this function until intiialized!";
 
-    return await this.posts.find({ }).toArray();
+    return await this.posts.find({ category }).toArray();
   }
 
   public static getPost = async (slug: string): Promise<PostSchema> => {
