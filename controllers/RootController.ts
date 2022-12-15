@@ -5,8 +5,11 @@
 // Dependencies
 import { BaseController, Controller, Get } from "@deps";
 
+// Database
+import Database from "@database";
+
 // Types
-import type { RequestEvent, TResponse } from "@types";
+import type { RequestEvent, TResponse, SettingsSchema } from "@types";
 
 @Controller("/")
 class RootController extends BaseController {
@@ -19,15 +22,15 @@ class RootController extends BaseController {
     } as TResponse);
   }
 
-  @Get("/motd")
-  motd({ response: res }: RequestEvent): Promise<void> | Response {
-    // TODO: Get MOTD from MongoDB
+  @Get("/settings")
+  async settings({ response: res }: RequestEvent): Promise<void | Response> {
+    const { motd }: SettingsSchema = await Database.getSettings();
 
     return res.status(200).json({
       status: 200,
-      message: "Succesfully fetched MOTD",
+      message: "Succesfully fetched settings",
       data: {
-        motd: "Welcome to `raci.sm`"
+        motd
       }
     });
   }

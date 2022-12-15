@@ -32,6 +32,9 @@ export interface PostSchema {
   category: string
 }
 
+export interface SettingsSchema {
+  motd: string
+}
 
 // External Types
 export type { RequestEvent } from "https://deno.land/x/nhttp@1.1.9/mod.ts";
