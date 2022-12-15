@@ -15,7 +15,7 @@ import Database from "@database";
 // Controllers
 import { RootController } from "@controllers";
 
-await Database.init(Config.get("mongo", "uri"), Config.get("mongo", "database"));
+await Database.init(Config.get("database", "uri"), Config.get("database", "database"));
 
 class Application extends NHttp {
   constructor() {
