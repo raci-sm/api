@@ -6,16 +6,19 @@
 import { Config, Logger } from "@utils";
 await Config.load("config.toml");
 
-// Dependencies
-import { addControllers, NHttp } from "@deps";
-
 // Database
 import Database from "@database";
 
+if(!await Database.init(Config.get("database", "uri"), Config.get("database", "database"))) {
+  Logger.error("Unable to connect to MongoDB!")
+  Deno.exit();
+}
+
+// Dependencies
+import { addControllers, NHttp } from "@deps";
+
 // Controllers
 import { RootController } from "@controllers";
-
-await Database.init(Config.get("database", "uri"), Config.get("database", "database"));
 
 class Application extends NHttp {
   constructor() {
@@ -44,4 +47,4 @@ new Application().listen(Config.get("app", "port"), (error: Error | undefined) =
     return Logger.error(error.message || error.toString());
 
   Logger.log("Listening!");
-})
+});
