@@ -20,6 +20,9 @@ import { addControllers, NHttp } from "@deps";
 // Controllers
 import { RootController, CategoriesController, PostsController } from "@controllers";
 
+// Types
+import { RequestEvent, TResponse } from "@types";
+
 class Application extends NHttp {
   constructor() {
     super();
@@ -34,6 +37,24 @@ class Application extends NHttp {
 
       return next();
     });
+
+    this.on404(({ response: res }: RequestEvent) => {
+      return res.status(404).json({
+        status: 404,
+        message: `Unable to find requested resource!`,
+        data: { }
+      } as TResponse);
+    });
+
+    this.onError((error, { response: res }: RequestEvent) => {
+      Logger.error(error.message || error.toString());
+
+      return res.status(500).json({
+        status: 500,
+        message: "Internal Server Error - the code monkeys at out HQ are working vewy hard to fix this!",
+        data: { }
+      } as TResponse);
+    })
 
     /* Controllers */
     this.use("/", addControllers([
