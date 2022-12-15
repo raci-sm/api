@@ -5,5 +5,6 @@
 // Controllers
 import RootController from "./RootController.ts";
 import CategoriesController from "./CategoriesController.ts";
+import PostsController from "./PostsController.ts";
 
-export { RootController, CategoriesController };
+export { RootController, CategoriesController, PostsController };
