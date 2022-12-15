@@ -1,0 +1,6 @@
+[app]
+port = 2222
+
+[database]
+uri = ""
+database = ""
