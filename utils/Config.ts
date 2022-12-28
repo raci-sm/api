@@ -20,7 +20,7 @@ class Config {
   };
 
   public static get = (key?: string, value?: string): TRet => {
-    if(!this.config || !key || (!key && !value))
+    if(!this.config || !key || !value)
       return this.config;
 
     let keys: string[] = key.split("."),
